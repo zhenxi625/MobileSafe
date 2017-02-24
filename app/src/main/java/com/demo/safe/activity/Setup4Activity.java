@@ -57,6 +57,7 @@ public class Setup4Activity extends BaseActivity {
         Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
         startActivity(intent);
         finish();
+        overridePendingTransition(R.anim.pre_in_anim,R.anim.pre_out_anim);
     }
 
     public void nextPage(View view) {
@@ -66,6 +67,7 @@ public class Setup4Activity extends BaseActivity {
             startActivity(intent);
             finish();
             SpUtils.putBoolean(this, ConstantValue.SETUP_OVER, true);
+            overridePendingTransition(R.anim.next_in_anim,R.anim.next_out_anim);
         } else {
             ToastUtil.show(getApplicationContext(), "未开启防盗设置");
         }
