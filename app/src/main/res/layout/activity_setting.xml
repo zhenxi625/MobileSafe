@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TitleStyle"
+        android:text="设置中心" />
+
+    <!--E:\Android\sdk\platforms\android-25\data\res\values-->
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="自动更新设置"
+        safedemo:desoff="自动更新已关闭"
+        safedemo:deson="自动更新已开启">
+    </com.demo.safe.view.SettingItemView>
+
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_phone_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="电话归属地的显示设置"
+        safedemo:desoff="归属地的显示已关闭"
+        safedemo:deson="归属地的显示已开启">
+    </com.demo.safe.view.SettingItemView>
+
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_address_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="设置归属地显示风格"
+        safedemo:desoff="不透明"
+        safedemo:deson="透明">
+    </com.demo.safe.view.SettingItemView>
+
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="归属地提示框位置"
+        safedemo:desoff="不设置"
+        safedemo:deson="设置归属地提示框位置">
+    </com.demo.safe.view.SettingItemView>
+
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_blacklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="黑名单拦截设置"
+        safedemo:desoff="黑名单拦截已关闭"
+        safedemo:deson="黑名单拦截已开启">
+    </com.demo.safe.view.SettingItemView>
+
+    <com.demo.safe.view.SettingItemView
+        xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
+        android:id="@+id/siv_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        safedemo:destitle="程序锁设置"
+        safedemo:desoff="程序锁已关闭"
+        safedemo:deson="程序锁已开启">
+    </com.demo.safe.view.SettingItemView>
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.demo.safe.activity"
+    android:versionCode="1"
+    android:versionName="1.0.0">
+    <!--android:versionCode 本地应用版本号1，版本号是2，可以提示用户更新-->
+    <!--android:versionName
+    2.1.1：
+    第一位：项目有重大更新（大部分功能的添加，界面的整体修改）
+    第二位：更新部分功能
+    第三位：修复原有bug-->
+
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
+
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许程序改变Wi-Fi连接状态-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name="com.demo.safe.util.MyApplication">
+        <activity android:name="com.demo.safe.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.demo.safe.activity.HomeActivity"/>
+        <activity android:name="com.demo.safe.activity.SettingActivity"/>
+        <activity android:name="com.demo.safe.activity.SetupOverActivity"/>
+        <activity android:name="com.demo.safe.activity.Setup1Activity"/>
+        <activity android:name="com.demo.safe.activity.Setup2Activity"/>
+        <activity android:name="com.demo.safe.activity.Setup3Activity"/>
+        <activity android:name="com.demo.safe.activity.Setup4Activity"/>
+    </application>
+
+</manifest>
