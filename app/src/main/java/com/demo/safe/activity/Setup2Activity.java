@@ -31,6 +31,7 @@ public class Setup2Activity extends BaseActivity implements View.OnClickListener
 
         siv_sim_bind = (SettingItemView) findViewById(R.id.siv_sim_bind);
         siv_sim_bind.setOnClickListener(this);
+        initData();
     }
 
     @Override
@@ -48,25 +49,17 @@ public class Setup2Activity extends BaseActivity implements View.OnClickListener
         }
     }
 
-    private void initUI(){
+    private void initData(){
         String sim_num = SpUtils.getString(getApplicationContext(), ConstantValue.SIM_NUM, "");
         if (TextUtils.isEmpty(sim_num)) {
             siv_sim_bind.setCheck(false);
         } else {
             siv_sim_bind.setCheck(true);
         }
-        boolean isCheck = siv_sim_bind.isCheck();
-        siv_sim_bind.setCheck(!isCheck);
     }
 
     private void getSimNumber() {
         Context context = getApplicationContext();
-        String sim_num = SpUtils.getString(context, ConstantValue.SIM_NUM, "");
-        if (TextUtils.isEmpty(sim_num)) {
-            siv_sim_bind.setCheck(false);
-        } else {
-            siv_sim_bind.setCheck(true);
-        }
         boolean isCheck = siv_sim_bind.isCheck();
         siv_sim_bind.setCheck(!isCheck);
         if (!isCheck) {
