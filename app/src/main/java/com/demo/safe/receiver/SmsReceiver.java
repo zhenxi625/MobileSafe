@@ -3,6 +3,7 @@ package com.demo.safe.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationProvider;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
@@ -35,6 +36,10 @@ public class SmsReceiver extends BroadcastReceiver {
                     MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.alarm);
                     mediaPlayer.setLooping(true);//无限循环
                     mediaPlayer.start();
+                }
+
+                if (messageBody.contains("#*location*#")){
+                    context.startService(new Intent(context, LocationReceiver.class));
                 }
             }
         }
