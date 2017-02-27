@@ -19,7 +19,7 @@ import com.demo.safe.view.SettingItemView;
 /**
  * Created by ChenXingLing on 2017/2/23.
  */
-public class Setup2Activity extends BaseActivity implements View.OnClickListener {
+public class Setup2Activity extends BaseSetupActivity implements View.OnClickListener {
 
     private SettingItemView siv_sim_bind;
     private static final int REQUEST_READ_PHONE_STATE = 1;
@@ -32,6 +32,28 @@ public class Setup2Activity extends BaseActivity implements View.OnClickListener
         siv_sim_bind = (SettingItemView) findViewById(R.id.siv_sim_bind);
         siv_sim_bind.setOnClickListener(this);
         initData();
+    }
+
+    @Override
+    public void showNextPage() {
+        String simNum = SpUtils.getString(this, ConstantValue.SIM_NUM, "");
+        if (!TextUtils.isEmpty(simNum)) {
+            Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        } else {
+            ToastUtil.show(getApplicationContext(), "请绑定sim卡");
+        }
+    }
+
+    @Override
+    public void showPrePage() {
+        Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
+        startActivity(intent);
+        finish();
+
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     @Override
@@ -49,7 +71,7 @@ public class Setup2Activity extends BaseActivity implements View.OnClickListener
         }
     }
 
-    private void initData(){
+    private void initData() {
         String sim_num = SpUtils.getString(getApplicationContext(), ConstantValue.SIM_NUM, "");
         if (TextUtils.isEmpty(sim_num)) {
             siv_sim_bind.setCheck(false);
@@ -69,26 +91,6 @@ public class Setup2Activity extends BaseActivity implements View.OnClickListener
         } else {
             SpUtils.remove(context, ConstantValue.SIM_NUM);
         }
-    }
-
-    public void nextPage(View view) {
-        String simNum = SpUtils.getString(this,ConstantValue.SIM_NUM,"");
-        if (!TextUtils.isEmpty(simNum)){
-            Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.next_in_anim,R.anim.next_out_anim);
-        } else {
-            ToastUtil.show(getApplicationContext(), "请绑定sim卡");
-        }
-    }
-
-    public void preBtn(View view) {
-        Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
-        startActivity(intent);
-        finish();
-
-        overridePendingTransition(R.anim.pre_in_anim,R.anim.pre_out_anim);
     }
 
     @Override

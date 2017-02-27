@@ -56,12 +56,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.siv_update:
                 boolean isCheck = siv_update.isCheck();
                 siv_update.setCheck(!isCheck);
                 SpUtils.putBoolean(MyApplication.getContext(), ConstantValue.OPEN_UPDATE, !isCheck);
-            break;
+                break;
             case R.id.siv_phone_address:
                 boolean isCheckPhoneAddress = siv_phone_address.isCheck();
                 siv_phone_address.setCheck(!isCheckPhoneAddress);

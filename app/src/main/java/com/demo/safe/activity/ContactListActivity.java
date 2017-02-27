@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by ChenXingLing on 2017/2/24.
  */
-public class ContactListActivity extends BaseActivity{
+public class ContactListActivity extends BaseActivity {
 
     private static final String tag = "ContactListActivity";
     private static final int REQUEST_READ_CONTACTS = 1;

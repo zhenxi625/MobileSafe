@@ -26,7 +26,7 @@
     </style>
 
     <style name="preBtn">
-        <item name="android:onClick">preBtn</item>
+        <item name="android:onClick">prePage</item>
         <item name="android:text">上一页</item>
         <item name="android:background">@drawable/button</item>
         <item name="android:layout_width">wrap_content</item>

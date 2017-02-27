@@ -2,7 +2,6 @@ package com.demo.safe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -13,7 +12,7 @@ import com.demo.safe.util.ToastUtil;
 /**
  * Created by ChenXingLing on 2017/2/23.
  */
-public class Setup4Activity extends BaseActivity {
+public class Setup4Activity extends BaseSetupActivity {
 
     private CheckBox cb_box;
 
@@ -23,6 +22,28 @@ public class Setup4Activity extends BaseActivity {
         setContentView(R.layout.activity_setup4);
 
         initUI();
+    }
+
+    @Override
+    public void showNextPage() {
+        boolean isOpen = SpUtils.getBoolean(getApplicationContext(), ConstantValue.OPEN_SECURITY, false);
+        if (isOpen) {
+            Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
+            startActivity(intent);
+            finish();
+            SpUtils.putBoolean(this, ConstantValue.SETUP_OVER, true);
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        } else {
+            ToastUtil.show(getApplicationContext(), "未开启防盗设置");
+        }
+    }
+
+    @Override
+    public void showPrePage() {
+        Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     private void initUI() {
@@ -50,27 +71,6 @@ public class Setup4Activity extends BaseActivity {
                 }
             }
         });
-
-    }
-
-    public void preBtn(View view) {
-        Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.pre_in_anim,R.anim.pre_out_anim);
-    }
-
-    public void nextPage(View view) {
-        boolean isOpen = SpUtils.getBoolean(getApplicationContext(), ConstantValue.OPEN_SECURITY, false);
-        if (isOpen) {
-            Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
-            startActivity(intent);
-            finish();
-            SpUtils.putBoolean(this, ConstantValue.SETUP_OVER, true);
-            overridePendingTransition(R.anim.next_in_anim,R.anim.next_out_anim);
-        } else {
-            ToastUtil.show(getApplicationContext(), "未开启防盗设置");
-        }
 
     }
 }

@@ -1,19 +1,21 @@
 package com.demo.safe.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 
 /**
- * Created by ChenXingLing on 2017/1/6.
+ * Created by ChenXingLing on 2017/2/24.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("BaseActivity", getClass().getSimpleName());
+        Log.i("BaseSetupActivity", getClass().getSimpleName());
         ActivityController.addActivity(this);
     }
 
