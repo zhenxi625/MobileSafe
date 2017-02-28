@@ -1,8 +1,10 @@
 package com.demo.safe.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.demo.safe.service.AddressService;
 import com.demo.safe.util.ConstantValue;
 import com.demo.safe.util.MyApplication;
 import com.demo.safe.util.SpUtils;
@@ -24,34 +26,21 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_setting);
 
         initUpdate();
+        initAddress();
     }
 
-    /*private void initUpdate() {
-        final SettingItemView siv_update = (SettingItemView) findViewById(R.id.siv_update);
-        boolean open_update = SpUtils.getBoolean(this, ConstantValue.OPEN_UPDATE, false);
-        siv_update.setCheck(open_update);
-        siv_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isCheck = siv_update.isCheck();
-                siv_update.setCheck(!isCheck);
-                SpUtils.putBoolean(MyApplication.getContext(), ConstantValue.OPEN_UPDATE, !isCheck);
-            }
-        });
-    }*/
+    private void initAddress() {
+        siv_phone_address = (SettingItemView) findViewById(R.id.siv_phone_address);
+        boolean open_phone_address = SpUtils.getBoolean(this, ConstantValue.OPEN_PHONE_ADDRESS, false);
+        siv_phone_address.setCheck(open_phone_address);
+        siv_phone_address.setOnClickListener(this);
+    }
 
     private void initUpdate() {
         siv_update = (SettingItemView) findViewById(R.id.siv_update);
         boolean open_update = SpUtils.getBoolean(this, ConstantValue.OPEN_UPDATE, false);
         siv_update.setCheck(open_update);
         siv_update.setOnClickListener(this);
-
-
-        siv_phone_address = (SettingItemView) findViewById(R.id.siv_phone_address);
-        boolean open_phone_address = SpUtils.getBoolean(this, ConstantValue.OPEN_PHONE_ADDRESS, false);
-        siv_phone_address.setCheck(open_phone_address);
-        siv_phone_address.setOnClickListener(this);
-
     }
 
     @Override
@@ -65,7 +54,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.siv_phone_address:
                 boolean isCheckPhoneAddress = siv_phone_address.isCheck();
                 siv_phone_address.setCheck(!isCheckPhoneAddress);
-                SpUtils.putBoolean(MyApplication.getContext(), ConstantValue.OPEN_PHONE_ADDRESS, !isCheckPhoneAddress);
+                if (!isCheckPhoneAddress){
+                    startService(new Intent(getApplicationContext(), AddressService.class));
+                } else {
+                    stopService(new Intent(getApplicationContext(), AddressService.class));
+                }
+//                SpUtils.putBoolean(MyApplication.getContext(), ConstantValue.OPEN_PHONE_ADDRESS, !isCheckPhoneAddress);
                 break;
             default:
                 break;

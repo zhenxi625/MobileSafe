@@ -82,6 +82,7 @@
         </receiver>
 
         <service android:name="com.demo.safe.receiver.LocationReceiver"/>
+        <service android:name="com.demo.safe.service.AddressService"/>
     </application>
 
 </manifest>
