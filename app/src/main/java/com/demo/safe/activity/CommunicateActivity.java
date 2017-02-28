@@ -52,12 +52,12 @@ public class CommunicateActivity extends BaseActivity implements View.OnClickLis
                 }
                 break;
             case R.id.bt_wipedata:
-                wipeData();
+//                wipeData();
                 break;
             case R.id.bt_uninstall:
+//                uninstall();
                 break;
             default:
-                uninstall();
                 break;
         }
     }

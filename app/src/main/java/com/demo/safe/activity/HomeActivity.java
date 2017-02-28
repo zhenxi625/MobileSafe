@@ -78,6 +78,8 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
             case 6:
                 break;
             case 7:
+                Intent aToolActivity = new Intent(getApplicationContext(),AToolActivity.class);
+                startActivity(aToolActivity);
                 break;
             case 8:
                 Intent intent1 = new Intent(MyApplication.getContext(), SettingActivity.class);

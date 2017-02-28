@@ -27,6 +27,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--获取粗略坐标权限-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -51,6 +52,8 @@
         <activity android:name="com.demo.safe.activity.Setup4Activity"/>
         <activity android:name="com.demo.safe.activity.ContactListActivity"/>
         <activity android:name="com.demo.safe.activity.CommunicateActivity"/>
+        <activity android:name="com.demo.safe.activity.AToolActivity"/>
+        <activity android:name="com.demo.safe.activity.QueryAddressActivity"/>
 
         <!--设备管理器-->
         <receiver
