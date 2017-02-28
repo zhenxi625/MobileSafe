@@ -64,6 +64,8 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
                 showDialog();
                 break;
             case 1:
+                Intent com = new Intent(getApplicationContext(), CommunicateActivity.class);
+                startActivity(com);
                 break;
             case 2:
                 break;

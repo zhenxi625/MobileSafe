@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">SafeDemo</string>
     <string name="version_name">版本名称</string>
+
+    <string name="action_settings">setting</string>
+    <string name="hello_world">Hello World</string>
+    <string name="sample_device_admin">超级管理员</string>
+    <string name="sample_device_admin_description">一键锁屏，一键激活，一键清除，一键卸载</string>
 </resources>

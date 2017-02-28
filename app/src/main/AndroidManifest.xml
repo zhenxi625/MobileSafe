@@ -28,7 +28,6 @@
     <!--获取粗略坐标权限-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -51,6 +50,21 @@
         <activity android:name="com.demo.safe.activity.Setup3Activity"/>
         <activity android:name="com.demo.safe.activity.Setup4Activity"/>
         <activity android:name="com.demo.safe.activity.ContactListActivity"/>
+        <activity android:name="com.demo.safe.activity.CommunicateActivity"/>
+
+        <!--设备管理器-->
+        <receiver
+            android:name="com.demo.safe.receiver.DeviceAdmin"
+            android:description="@string/sample_device_admin_description"
+            android:label="@string/sample_device_admin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" ><!-- description和label都是strings.xml里配置的 -->
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
 
         <!--手机重启广播-->
         <receiver android:name="com.demo.safe.receiver.BootReceiver">
