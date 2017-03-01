@@ -1,8 +1,14 @@
 package com.demo.safe.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +20,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.demo.safe.util.ConstantValue;
 import com.demo.safe.util.Md5Util;
@@ -26,6 +33,7 @@ import com.demo.safe.util.ToastUtil;
  */
 public class HomeActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
+    private static final int REQUEST_SYSTEM_ALERT_WINDOW = 1;
     private GridView gv_home;
     private String[] mTitleStr;
     private int[] mDrawable;
@@ -58,6 +66,34 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_SYSTEM_ALERT_WINDOW:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    //有权限的操作
+                    Intent intent1 = new Intent(MyApplication.getContext(), SettingActivity.class);
+                    startActivity(intent1);
+                } else {
+                    ToastUtil.show(getApplicationContext(), "没有权限");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 10) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if(!Settings.canDrawOverlays(getApplicationContext())) {
+                    Toast.makeText(this,"not granted",Toast.LENGTH_SHORT);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
@@ -82,8 +118,20 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
                 startActivity(aToolActivity);
                 break;
             case 8:
-                Intent intent1 = new Intent(MyApplication.getContext(), SettingActivity.class);
-                startActivity(intent1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(!Settings.canDrawOverlays(getApplicationContext())) {
+                        //启动Activity让用户授权
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                        startActivity(intent);
+                        return;
+                    } else {
+                        Intent intent1 = new Intent(MyApplication.getContext(), SettingActivity.class);
+                        startActivity(intent1);
+                    }
+                } else {
+                    Intent intent1 = new Intent(MyApplication.getContext(), SettingActivity.class);
+                    startActivity(intent1);
+                }
                 break;
             default:
                 break;

@@ -31,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +41,7 @@ import java.net.URL;
 public class SplashActivity extends BaseActivity {
 
     protected static final String tag = "SplashActivity";
+    private static final int REQUEST_SYSTEM_ALERT_WINDOW = 5;
     private String mVersionName;
     private String mVersionDes;
     private String mVersionCode;
@@ -94,44 +94,44 @@ public class SplashActivity extends BaseActivity {
         //初始化动画
         initAnimation();
 
-//        initDB();
+        initDB();
     }
 
     private void initDB() {
-        initAddressDB("mAddress.db");
+        initAddressDB("address.db");
     }
 
     /**
      * copy数据库至files文件夹下
+     *
      * @param dbName
      */
     private void initAddressDB(String dbName) {
         //1.在files文件夹下创建同名dbName数据库文件过程
-        File file = getFilesDir();
-        File file1 = new File(file,dbName);
-        if (file1.exists()){
+        File files = getFilesDir();
+        File file = new File(files, dbName);
+        if (file.exists()) {
             return;
         }
-        InputStream inputStream = null;
+        InputStream stream = null;
         FileOutputStream fos = null;
         //2.输入流读入第三方资产目录下的文件
         try {
-            inputStream = getAssets().open(dbName);
+            stream = getAssets().open(dbName);
             //3.将读入的内容输入到指定文件夹下的文件中去
             fos = new FileOutputStream(file);
             //4.每次读取的内容大小
             byte[] bs = new byte[1024];
-            int temp = 1;
-            while ((temp=inputStream.read(bs)) != -1){
-                fos.write(bs,0,temp);
+            int temp = -1;
+            while ((temp = stream.read(bs)) != -1) {
+                fos.write(bs, 0, temp);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (inputStream != null && fos != null){
+            if (stream != null && fos != null) {
                 try {
-                    inputStream.close();
+                    stream.close();
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -165,11 +165,11 @@ public class SplashActivity extends BaseActivity {
         mLocalVersionCode = getVersionCode();
         LogUtil.d(tag, "版本号:" + mLocalVersionCode);
         //3.获取服务器版本号
-        if (SpUtils.getBoolean(this, ConstantValue.OPEN_UPDATE,false)){
+        if (SpUtils.getBoolean(this, ConstantValue.OPEN_UPDATE, false)) {
             checkVersion();
         } else {
 //            enterHome();
-            mHandler.sendEmptyMessageDelayed(ENTER_HOME,4000);
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
         }
     }
 
@@ -365,4 +365,5 @@ public class SplashActivity extends BaseActivity {
         enterHome();
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

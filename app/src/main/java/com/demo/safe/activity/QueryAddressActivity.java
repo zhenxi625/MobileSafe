@@ -72,7 +72,7 @@ public class QueryAddressActivity extends BaseActivity {
                     vibrator.vibrate(new long[]{300,300,300,300},-1);
 
                 } else {
-//                query(phone);//查询
+                query(phone);//查询
                 }
             }
         });
@@ -91,7 +91,7 @@ public class QueryAddressActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String phone = et_phone.getText().toString();
-//                query(phone);//查询
+                query(phone);//查询
             }
         });
     }
