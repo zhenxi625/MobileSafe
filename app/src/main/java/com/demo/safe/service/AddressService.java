@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.demo.safe.activity.R;
 import com.demo.safe.engine.AddressDao;
+import com.demo.safe.util.ConstantValue;
 import com.demo.safe.util.LogUtil;
+import com.demo.safe.util.SpUtils;
 
 /**
  * Created by ChenXingLing on 2017/2/28.
@@ -40,6 +42,7 @@ public class AddressService extends Service {
             tv_toast.setText(mAddress);
         }
     };
+    private int[] mImagesId;
 
     @Override
     public void onCreate() {
@@ -113,6 +116,13 @@ public class AddressService extends Service {
         //吐司的显示效果(布局文件)
         mViewToast = View.inflate(this, R.layout.toast_view, null);
         tv_toast = (TextView) mViewToast.findViewById(R.id.tv_toast);
+
+        //从SpUtils中获取颜色索引值对应的图片
+        mImagesId = new int[]{R.drawable.toastbg, R.drawable.toastbgcheng,
+                R.drawable.toastbglan, R.drawable.toastbghui, R.drawable.toastbglv};
+        int toastStyleIndex = SpUtils.getInt(getApplicationContext(), ConstantValue.TOAST_STYLE,0);
+        tv_toast.setBackgroundResource(mImagesId[toastStyleIndex]);
+
         mWM.addView(mViewToast, mParams);
 
         query(incomingNumber);

@@ -51,6 +51,26 @@ public class SpUtils {
         return preferences.getString(key,defaultValue);
     }
 
+    /**
+     *
+     * @param context 上下文环境
+     * @param key 存储节点名称
+     * @param value 存储节点值
+     */
+    public static void putInt(Context context,String key,int value){
+        if (null == preferences){
+            preferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        }
+        preferences.edit().putInt(key, value).apply();
+    }
+
+    public static int getInt(Context context,String key,int defaultValue){
+        if (null == preferences){
+            preferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        }
+        return preferences.getInt(key,defaultValue);
+    }
+
     public static void remove(Context context, String key) {
         if (null == preferences){
             preferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);

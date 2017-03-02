@@ -57,6 +57,8 @@
         <activity android:name="com.demo.safe.activity.CommunicateActivity"/>
         <activity android:name="com.demo.safe.activity.AToolActivity"/>
         <activity android:name="com.demo.safe.activity.QueryAddressActivity"/>
+        <activity android:name="com.demo.safe.activity.ToastLocationActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!--设备管理器-->
         <receiver

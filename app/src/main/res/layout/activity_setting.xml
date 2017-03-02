@@ -29,25 +29,19 @@
         safedemo:deson="归属地的显示已开启">
     </com.demo.safe.view.SettingItemView>
 
-    <com.demo.safe.view.SettingItemView
+    <com.demo.safe.view.SettingClickView
         xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
-        android:id="@+id/siv_address_style"
+        android:id="@+id/scv_toast_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        safedemo:destitle="设置归属地显示风格"
-        safedemo:desoff="不透明"
-        safedemo:deson="透明">
-    </com.demo.safe.view.SettingItemView>
+        android:layout_height="wrap_content">
+    </com.demo.safe.view.SettingClickView>
 
-    <com.demo.safe.view.SettingItemView
+    <com.demo.safe.view.SettingClickView
         xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
-        android:id="@+id/siv_dialog"
+        android:id="@+id/scv_location"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        safedemo:destitle="归属地提示框位置"
-        safedemo:desoff="不设置"
-        safedemo:deson="设置归属地提示框位置">
-    </com.demo.safe.view.SettingItemView>
+        android:layout_height="wrap_content">
+    </com.demo.safe.view.SettingClickView>
 
     <com.demo.safe.view.SettingItemView
         xmlns:safedemo="http://schemas.android.com/apk/lib/com.demo.safe.activity"
