@@ -41,8 +41,9 @@ public class ToastLocationActivity extends BaseActivity {
         mBtTop = (Button) findViewById(R.id.bt_top);
         mBtBottom = (Button) findViewById(R.id.bt_bottom);
 
+        WindowManager mWM = (WindowManager) getSystemService(WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        mWM.getDefaultDisplay().getMetrics(dm);
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
 
@@ -76,6 +77,8 @@ public class ToastLocationActivity extends BaseActivity {
                     int right = screenWidth/2 + mIvDrag.getWidth()/2;
                     int bottom = screenHeight/2 + mIvDrag.getHeight()/2;
                     mIvDrag.layout(left, top, right, bottom);
+                    SpUtils.putInt(getApplicationContext(), ConstantValue.LOCATION_X, mIvDrag.getLeft());
+                    SpUtils.putInt(getApplicationContext(), ConstantValue.LOCATION_Y, mIvDrag.getTop());
                 }
             }
         });

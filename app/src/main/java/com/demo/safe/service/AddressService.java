@@ -10,7 +10,9 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -36,6 +38,8 @@ public class AddressService extends Service {
     private WindowManager mWM;
     private String mAddress;
     private TextView tv_toast;
+    private int screenWidth;
+    private int screenHeight;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -53,6 +57,11 @@ public class AddressService extends Service {
         mTM.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
         mWM = (WindowManager) getSystemService(WINDOW_SERVICE);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        mWM.getDefaultDisplay().getMetrics(dm);
+        screenWidth = dm.widthPixels;
+        screenHeight = dm.heightPixels;
 
         super.onCreate();
     }
@@ -117,10 +126,67 @@ public class AddressService extends Service {
         mViewToast = View.inflate(this, R.layout.toast_view, null);
         tv_toast = (TextView) mViewToast.findViewById(R.id.tv_toast);
 
+        mViewToast.setOnTouchListener(new View.OnTouchListener() {
+            private int startX;
+            private int startY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = (int) event.getRawX();
+                        startY = (int) event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int moveX = (int) event.getRawX();
+                        int moveY = (int) event.getRawY();
+
+                        int disX = moveX - startX;
+                        int disY = moveY - startY;
+
+                        params.x = params.x + disX;
+                        params.y = params.y + disY;
+
+                        if (params.x < 0) {
+                            params.x = 0;
+                        }
+                        if (params.y < 0) {
+                            params.y = 0;
+                        }
+                        if (params.x > screenWidth - mViewToast.getWidth()) {
+                            params.x = screenWidth - mViewToast.getWidth();
+                        }
+                        if (params.y > screenHeight - mViewToast.getHeight() - 22) {
+                            params.y = screenHeight - mViewToast.getHeight() - 22;
+                        }
+
+                        //更新窗体中吐司位置
+                        mWM.updateViewLayout(mViewToast, params);
+
+                        startX = (int) event.getRawX();
+                        startY = (int) event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        SpUtils.putInt(getApplicationContext(), ConstantValue.LOCATION_X, params.x);
+                        SpUtils.putInt(getApplicationContext(), ConstantValue.LOCATION_Y, params.y);
+                        break;
+                    default:
+                        break;
+                }
+                //既要响应点击事件又要响应拖拽事件，此结果改为false
+                return true;
+            }
+        });
+
+        //吐司左上角x坐标
+        params.x = SpUtils.getInt(getApplicationContext(), ConstantValue.LOCATION_X, 0);
+        //吐司左上角y坐标
+        params.y = SpUtils.getInt(getApplicationContext(), ConstantValue.LOCATION_Y, 0);
+
         //从SpUtils中获取颜色索引值对应的图片
         mImagesId = new int[]{R.drawable.toastbg, R.drawable.toastbgcheng,
                 R.drawable.toastbglan, R.drawable.toastbghui, R.drawable.toastbglv};
-        int toastStyleIndex = SpUtils.getInt(getApplicationContext(), ConstantValue.TOAST_STYLE,0);
+        int toastStyleIndex = SpUtils.getInt(getApplicationContext(), ConstantValue.TOAST_STYLE, 0);
         tv_toast.setBackgroundResource(mImagesId[toastStyleIndex]);
 
         mWM.addView(mViewToast, mParams);

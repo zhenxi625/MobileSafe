@@ -59,6 +59,8 @@
         <activity android:name="com.demo.safe.activity.QueryAddressActivity"/>
         <activity android:name="com.demo.safe.activity.ToastLocationActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.demo.safe.activity.BackGroundActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!--设备管理器-->
         <receiver
@@ -88,6 +90,7 @@
 
         <service android:name="com.demo.safe.receiver.LocationReceiver"/>
         <service android:name="com.demo.safe.service.AddressService"/>
+        <service android:name="com.demo.safe.service.RocketService"/>
     </application>
 
 </manifest>
