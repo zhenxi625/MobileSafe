@@ -1,14 +1,11 @@
 package com.demo.safe.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -100,8 +97,13 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
                 showDialog();
                 break;
             case 1:
-                Intent com = new Intent(getApplicationContext(), CommunicateActivity.class);
-                startActivity(com);
+                //通信卫士
+                Intent bnActivity = new Intent(getApplicationContext(), BlackNumberActivity.class);
+                startActivity(bnActivity);
+
+                //一键锁屏
+//                Intent com = new Intent(getApplicationContext(), CommunicateActivity.class);
+//                startActivity(com);
                 break;
             case 2:
                 break;
@@ -114,6 +116,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
             case 6:
                 break;
             case 7:
+                //高级工具
                 Intent aToolActivity = new Intent(getApplicationContext(),AToolActivity.class);
                 startActivity(aToolActivity);
                 break;

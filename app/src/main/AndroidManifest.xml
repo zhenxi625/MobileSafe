@@ -3,6 +3,7 @@
     package="com.demo.safe.activity"
     android:versionCode="1"
     android:versionName="1.0.0">
+    
     <!--android:versionCode 本地应用版本号1，版本号是2，可以提示用户更新-->
     <!--android:versionName
     2.1.1：
@@ -61,6 +62,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name="com.demo.safe.activity.BackGroundActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.demo.safe.activity.BlackNumberActivity"/>
 
         <!--设备管理器-->
         <receiver
